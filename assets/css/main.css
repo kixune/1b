@@ -1,0 +1,75 @@
+@font-face {
+    font-family: 'tronregular';
+    src: url('../font/tron-webfont.woff2') format('woff2'),
+         url('../font/tron-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/*ELEMENTS*/
+body {
+  background: #181303;
+  text-align: center;
+}
+
+h1, h2, h4 {
+  font-family: 'tronregular', serif;
+}
+
+h1 {
+  -webkit-animation: glow 0.3s ease-in-out infinite alternate;
+-moz-animation: glow 0.3s ease-in-out infinite alternate;
+animation: glow 0.3s ease-in-out infinite alternate;
+}
+
+h2 {
+color: #fff;
+  -webkit-animation: glow 0.3s ease-in-out infinite alternate;
+-moz-animation: glow 0.3s ease-in-out infinite alternate;
+animation: glow 0.3s ease-in-out infinite alternate;
+}
+
+h4 {
+color: #fff;
+text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
+display: inline-block;
+margin: 0 30px;
+}
+
+/*CLASSES*/
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
+  }
+}
+
+
+
+
+/*IDS*/
+#top {
+border: 1.5px solid rgba(255, 255, 255, 0.4);
+margin: 40px 0 0 0;
+}
+
+#container {
+border: 1.5px solid rgba(255, 255, 255, 0.4);
+width: 400px;
+height: 400px;
+position: absolute;
+top: 50%;
+margin-top: -200px;
+left: 50%;
+margin-left: -200px;
+}
+
+#bottom {
+border: 1.5px solid rgba(255, 255, 255, 0.4);
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
