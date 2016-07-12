@@ -1,9 +1,10 @@
 @font-face {
-    font-family: 'tronregular';
-    src: url('../font/tron-webfont.woff2')    format('woff2'),
-    url('../font/tron-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'tronregular';
+  src: url('../font/tron-webfont.woff2')   format('woff2'),
+  url('../font/tron-webfont.woff')
+  format('woff');
+  font-weight: normal;
+  font-style: normal;
 
 }
 
@@ -11,6 +12,11 @@
 body {
   background: #181303;
   text-align: center;
+}
+
+div {
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  box-sizing: border-box;
 }
 
 h1, h2, h4 {
@@ -36,10 +42,15 @@ animation: glow 0.5s ease-in-out infinite alternate;
 }
 
 h4 {
+font-size: 1em;
 color: #fff;
 margin: 0 60px;
 display: inline;
+}
 
+p {
+  clear: both;
+  color: #fff;
 }
 
 /*CLASSES*/
@@ -52,12 +63,19 @@ display: inline;
   }
 }
 
+.player-name {
+  display: inline-block;
+}
 
+.key-guide {
+  font-size: 1em;
+  font-family: monospace;
+  line-height: 1em;
+}
 
 
 /*IDS*/
 #top {
-border: 1.5px solid rgba(255, 255, 255, 0.4);
 margin: 40px 0 0 0;
 }
 
@@ -73,17 +91,18 @@ margin-left: -250px;
 }
 
 #bottom {
-border: 1.5px solid rgba(255, 255, 255, 0.4);
-  width: 100%;
-  height: 50px;
-  position: absolute;
-  bottom: 0;
+width: 100%;
+height: 80px;
+position: absolute;
+bottom: 0;
 }
 
 #playaOne {
-  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #d91e18, 0 0 70px #d91e18, 0 0 80px #d91e18, 0 0 100px #d91e18;
+text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #d91e18, 0 0 70px #d91e18, 0 0 80px #d91e18, 0 0 100px #d91e18;
+float:left;
 }
 
 #playaTwo {
-  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #f5d76e, 0 0 70px #f5d76e, 0 0 80px #f5d76e;
+text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #f5d76e, 0 0 70px #f5d76e, 0 0 80px #f5d76e;
+float:right;
 }
