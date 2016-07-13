@@ -85,12 +85,15 @@ $(document).ready(function() {
       console.log(this.x);
       console.log(this.vx);
 
-      if ((this.vx === 1) && (this.x == 490)) {
-        this.x = -5;
+      if ((this.vx === 1) && (this.x == 480)) {
+        this.x = -8;
         console.log(this.x);
-      }
-       else if ((this.vx === -1) && (this.x == -5)) {
+      } else if ((this.vx === -1) && (this.x == -5)) {
         this.x = 490;
+      } else if ((this.vy === -1) && (this.y == -5)) {
+        this.y = 490;
+      } else if ((this.vy === 1) && (this.y == 490)) {
+        this.y = 0;
       }
 
     };
