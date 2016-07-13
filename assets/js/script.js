@@ -17,8 +17,6 @@ function init () {
   var playerOne = "";
   var playerTwo = "";
 
-
-
   function getName() {
     do {
       playerOne = prompt("Player 1:\nPlease enter your name");
@@ -26,15 +24,125 @@ function init () {
     do {
       playerTwo = prompt("Player 2:\nPlease enter your name");
     } while (playerTwo === null || playerTwo === "");
-    alert(playerOne + " is Red,\n" + playerTwo + " is Yellow.\n\nYour directional buttons are as displayed at the bottom.\n\nEliminate your opponents by blocking them..\n or laugh as they crash into themselves.\n\nBe careful not to suffer the same fate.");
+    alert(playerOne + " is Red,\n" + playerTwo + " is Yellow.\n\nYour directional keys are as displayed at the bottom.\n\nEliminate your opponents by blocking them..\n or laugh as they crash into themselves.\n\nBe careful not to suffer the same fate.");
   }getName();
 
-}
 
-init();
+
+
+
+
+}
+// init();
+
+
 
 $(document).ready(function() {
+  var $container = $("#container");
+  var PIXEL_SIZE = 0.5;
+  function Hebi(x, y, vx, vy, classname, word) {
+
+    this.x = x;
+    this.y = y;
+    this.vx = vx;
+    this.vy = vy;
+    // this.$nake = "<h4 class=" + classname + ">" + word + "</h4>";
+
+    this.$nake = $("<h4>");
+    this.classname = classname;
+    this.word = word;
+  }
+
+    // var yellow = new Hebi(100, 0, 1, 0, "yellow", "_");
 
 
+    Hebi.prototype.populate = function() {
+      this.$nake.addClass(this.classname);
+      this.$nake.html(this.word);
+      this.$nake.appendTo($container);
+    };
+
+
+    Hebi.prototype.update = function() {
+      // console.log('move red');
+      this.x += this.vx;
+      this.y += this.vy;
+      this.$nake.css({
+      left: this.x * PIXEL_SIZE,
+      top: this.y * PIXEL_SIZE,
+      });
+
+      console.log("test2");
+    };
+
+    Hebi.prototype.direction = function(_vx, _vy) {
+      this.vx = _vx;
+      this.vy = _vy;
+    };
+
+    Hebi.prototype.passThrough = function() {
+      console.log($container.width);
+      if (this.x > $container.width) {
+        this.x = 0;
+      console.log(x);
+      }
+    };
+
+
+    var red = new Hebi(0, 0, 1, 0, "red", "|");
+    // var yellow = new Hebi(440, 480, -1, 0, "yellow", "_==---");
+
+    red.populate();
+    // yellow.populate();
+    setInterval(red.update.bind(red), 10);
+    // setInterval(yellow.update.bind(yellow), 10);
+
+    function doKeyDown(evt) {
+      switch (evt.keyCode) {
+        case 87: //up
+        red.direction(0, -1);
+        console.log(red.direction);
+        break;
+
+        case 83: //down
+        red.direction(0, 1);
+        console.log(red.direction);
+        break;
+
+        case 65: //left
+        red.direction(-1, 0);
+        console.log(red.direction);
+        break;
+
+        case 68: //right
+        red.direction(1, 0);
+        console.log(red.direction);
+        break;
+      }
+    }
+
+    // function doKeyDownTwo(evt) {
+    //   switch (evt.keyCode) {
+    //     case 38: //up
+    //     yellow.direction(0, -1);
+    //     break;
+    //
+    //     case 40: //down
+    //     yellow.direction(0, 1);
+    //     break;
+    //
+    //     case 37: //left
+    //     yellow.direction(-1, 0);
+    //     break;
+    //
+    //     case 39: //right
+    //     yellow.direction(1, 0);
+    //     break;
+    //   }
+    // }
+
+    window.addEventListener('keydown', doKeyDown, true);
+    // window.addEventListener('keydown', doKeyDownTwo, true);
+  
 
 });

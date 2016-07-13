@@ -21,7 +21,7 @@ border: 1.5px solid rgba(255, 255, 255, 0.4);
 box-sizing: border-box;
 }
 
-h1, h2, h4 {
+h1, h2, h3, h4 {
 font-family: 'tronregular', serif;
 }
 
@@ -43,12 +43,16 @@ opacity: 0.8;
 animation: glow 0.5s ease-in-out infinite alternate;
 }
 
-h4 {
+h3 {
 font-size: 1em;
 color: #fff;
 }
 
-
+h4 {
+  font-size: 0.75em;
+  color: #fff;
+  position: absolute;
+}
 
 /*CLASSES*/
 @-webkit-keyframes glow {
@@ -72,7 +76,13 @@ color: #fff;
   line-height: 0.8em;
 }
 
+.red {
+text-shadow: 0 0 10px #fff, 0 0 20px #f00, 0 0 30px #f00, 0 0 40px #d91e18, 0 0 70px #d91e18, 0 0 80px #d91e18, 0 0 100px #d91e18;
+}
 
+.yellow {
+text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #f5d76e;
+}
 
 /*IDS*/
 #top {
@@ -83,11 +93,8 @@ margin: 40px 0 0 0;
 border: 1.5px solid rgba(255, 255, 255, 0.4);
 width: 500px;
 height: 500px;
-position: absolute;
-top: 55%;
-margin-top: -250px;
-left: 50%;
-margin-left: -250px;
+position: relative;
+margin: 2em auto 0 auto;
 }
 
 #bottom {
@@ -97,17 +104,18 @@ position: absolute;
 bottom: 0;
 }
 
-#playaOne {
-text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #d91e18, 0 0 70px #d91e18, 0 0 80px #d91e18, 0 0 100px #d91e18;
-}
-
-#playaTwo {
-text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #f5d76e, 0 0 70px #f5d76e, 0 0 80px #f5d76e;
-}
-
 #credits {
 font-size: 0.6em;
 color: #fff;
 margin-top: 2em;
 display: inline-block;
+}
+
+
+#playaOne {
+text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #f00, 0 0 40px #d91e18, 0 0 70px #d91e18, 0 0 80px #d91e18, 0 0 100px #d91e18;
+}
+
+#playaTwo {
+text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #f5d76e, 0 0 70px #f5d76e, 0 0 80px #f5d76e;
 }
