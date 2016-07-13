@@ -85,10 +85,12 @@ $(document).ready(function() {
       console.log(this.x);
       console.log(this.vx);
 
-      if ((this.vx = 1) && ((this.x + 21) > $container.width())) {
-        this.x = 0;
+      if ((this.vx === 1) && (this.x == 490)) {
+        this.x = -5;
         console.log(this.x);
-
+      }
+       else if ((this.vx === -1) && (this.x == -5)) {
+        this.x = 490;
       }
 
     };
