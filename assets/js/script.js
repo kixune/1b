@@ -39,7 +39,7 @@ function init () {
 
 $(document).ready(function() {
   var $container = $("#container");
-  var PIXEL_SIZE = 0.5;
+  var PIXEL_SIZE = 1;
   function Hebi(x, y, vx, vy, classname, word) {
 
     this.x = x;
@@ -64,15 +64,15 @@ $(document).ready(function() {
 
 
     Hebi.prototype.update = function() {
-      // console.log('move red');
+      console.log('move red');
       this.x += this.vx;
       this.y += this.vy;
       this.$nake.css({
       left: this.x * PIXEL_SIZE,
       top: this.y * PIXEL_SIZE,
       });
-
       console.log("test2");
+      this.passThrough();
     };
 
     Hebi.prototype.direction = function(_vx, _vy) {
@@ -81,21 +81,30 @@ $(document).ready(function() {
     };
 
     Hebi.prototype.passThrough = function() {
-      console.log($container.width);
-      if (this.x > $container.width) {
+
+      console.log(this.x);
+      console.log(this.vx);
+
+      if ((this.vx = 1) && ((this.x + 21) > $container.width())) {
         this.x = 0;
-      console.log(x);
+        console.log(this.x);
+
       }
+
     };
 
 
-    var red = new Hebi(0, 0, 1, 0, "red", "|");
-    // var yellow = new Hebi(440, 480, -1, 0, "yellow", "_==---");
+
+
+    var red = new Hebi(-5, 0, 1, 0, "red", "|");
+    // var yellow = new Hebi(477, 480, -1, 0, "yellow", "_");
 
     red.populate();
     // yellow.populate();
     setInterval(red.update.bind(red), 10);
     // setInterval(yellow.update.bind(yellow), 10);
+
+    red.passThrough();
 
     function doKeyDown(evt) {
       switch (evt.keyCode) {
@@ -121,28 +130,10 @@ $(document).ready(function() {
       }
     }
 
-    // function doKeyDownTwo(evt) {
-    //   switch (evt.keyCode) {
-    //     case 38: //up
-    //     yellow.direction(0, -1);
-    //     break;
-    //
-    //     case 40: //down
-    //     yellow.direction(0, 1);
-    //     break;
-    //
-    //     case 37: //left
-    //     yellow.direction(-1, 0);
-    //     break;
-    //
-    //     case 39: //right
-    //     yellow.direction(1, 0);
-    //     break;
-    //   }
-    // }
+
 
     window.addEventListener('keydown', doKeyDown, true);
     // window.addEventListener('keydown', doKeyDownTwo, true);
-  
+
 
 });
