@@ -28,7 +28,7 @@ font-family: 'tronregular', serif;
 h1 {
 font-size: 3em;
 letter-spacing: 10px;
-margin-bottom: 1em;
+margin-bottom: 0.5em;
   -webkit-animation: glow 3s ease-in-out infinite alternate;
   -moz-animation: glow 3s ease-in-out infinite alternate;
 animation: glow 3s ease-in-out infinite alternate;
@@ -78,6 +78,7 @@ h4 {
 
 .red {
 text-shadow: 0 0 10px #fff, 0 0 20px #f00, 0 0 30px #f00, 0 0 40px #d91e18, 0 0 70px #d91e18, 0 0 80px #d91e18, 0 0 100px #d91e18;
+font-size: 16px;
 }
 
 .yellow {
@@ -91,6 +92,7 @@ margin: 40px 0 0 0;
 
 #container {
 border: 1.5px solid rgba(255, 255, 255, 0.4);
+box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
 width: 500px;
 height: 500px;
 position: relative;
@@ -110,7 +112,6 @@ color: #fff;
 margin-top: 2em;
 display: inline-block;
 }
-
 
 #playaOne {
 text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #f00, 0 0 40px #d91e18, 0 0 70px #d91e18, 0 0 80px #d91e18, 0 0 100px #d91e18;

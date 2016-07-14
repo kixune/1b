@@ -40,102 +40,149 @@ function init () {
 $(document).ready(function() {
   var $container = $("#container");
   var PIXEL_SIZE = 1;
-  function Hebi(x, y, vx, vy, classname, word) {
+  var CONT_BORDER = 498;
+
+
+  function HebiUnit(x, y, vx, vy, classname, word, tail) {
 
     this.x = x;
     this.y = y;
     this.vx = vx;
     this.vy = vy;
-    // this.$nake = "<h4 class=" + classname + ">" + word + "</h4>";
+
 
     this.$nake = $("<h4>");
     this.classname = classname;
     this.word = word;
+    this.tail = tail;
   }
 
-    // var yellow = new Hebi(100, 0, 1, 0, "yellow", "_");
 
-
-    Hebi.prototype.populate = function() {
+    // Snake birth
+  HebiUnit.prototype = {
+    populate: function() {
       this.$nake.addClass(this.classname);
       this.$nake.html(this.word);
       this.$nake.appendTo($container);
-    };
+
+    },
+
+    move: function(x, y) {
+      // Move the tail to the next point
+      if (this.tail) {
+          this.tail.move(this.x, this.y);
+      }
+
+      // Sets position of snake
+      this.x = x;
+      this.y = y;
+
+      // Displays Snake's position
+      this.$nake.css({
+        left: this.x * PIXEL_SIZE,
+        top: this.y * PIXEL_SIZE,
+      });
+    },
 
 
-    Hebi.prototype.update = function() {
-      console.log('move red');
+    update: function() {
+      // Updates position of snake based on it's velocity
       this.x += this.vx;
       this.y += this.vy;
-      this.$nake.css({
-      left: this.x * PIXEL_SIZE,
-      top: this.y * PIXEL_SIZE,
-      });
-      console.log("test2");
-      this.passThrough();
-    };
 
-    Hebi.prototype.direction = function(_vx, _vy) {
-      this.vx = _vx;
-      this.vy = _vy;
-    };
-
-    Hebi.prototype.passThrough = function() {
-
-      console.log(this.x);
-      console.log(this.vx);
-
-      if ((this.vx === 1) && (this.x == 480)) {
-        this.x = -5;
-        console.log(this.x);
-      } else if ((this.vx === -1) && (this.x == -5)) {
-        this.x = 480;
-      } else if ((this.vy === -1) && (this.y == -5)) {
-        this.y = 490;
-      } else if ((this.vy === 1) && (this.y == 490)) {
+      // Grants permission to pass through walls
+      if ((this.vx === 1) && ((this.x + 16) == CONT_BORDER)) {
+        this.x = 0;
+      } else if ((this.vx === -1) && (this.x === 0)) {
+        this.x = CONT_BORDER - 16;
+      } else if ((this.vy === -1) && (this.y === 0)) {
+        this.y = CONT_BORDER - 16;
+      } else if ((this.vy === 1) && (this.y == CONT_BORDER - 16)) {
         this.y = 0;
       }
 
-    };
+      this.move(this.x, this.y);
+
+
+    },
+
+    // Used in key-mapping to dictate velocity
+    direction: function(vx, vy) {
+      this.vx = vx;
+      this.vy = vy;
+    },
+
+    // Snake gains extra unit after the former
+    restOfSnake: function (i) {
+      console.log("rest of snake"+i);
+      var oldTail = this.tail;
+      this.tail = new HebiUnit(0, 0, 1, 0, "red", "+", oldTail);
+    }
+  };
+
+
+    // Create a head
+    var red = new HebiUnit(0, 0, 1, 0, "red", "|");
+    // Make its tail
+    for (var i = 1; i < 7; i++) {
+      red.restOfSnake(i);
+      red.populate();
+
+    }
+    // var yellow = new HebiUnit(477, 480, -1, 0, "yellow", "_");
 
 
 
 
-    var red = new Hebi(-5, 0, 1, 0, "red", "|");
-    // var yellow = new Hebi(477, 480, -1, 0, "yellow", "_");
+
 
     red.populate();
     // yellow.populate();
-    setInterval(red.update.bind(red), 10);
+
+    setInterval(red.update.bind(red), 3);
     // setInterval(yellow.update.bind(yellow), 10);
 
-    red.passThrough();
+    console.log(red);
 
     function doKeyDown(evt) {
       switch (evt.keyCode) {
         case 87: //up
         red.direction(0, -1);
-        console.log(red.direction);
         break;
 
         case 83: //down
         red.direction(0, 1);
-        console.log(red.direction);
         break;
 
         case 65: //left
         red.direction(-1, 0);
-        console.log(red.direction);
         break;
 
         case 68: //right
         red.direction(1, 0);
-        console.log(red.direction);
         break;
       }
     }
 
-
+    // function doKeyDownTwo(evt) {
+    //   switch (evt.keyCode) {
+    //     case 38: //up
+    //     yellow.direction(0, -1);
+    //     break;
+    //
+    //     case 40: //down
+    //     yellow.direction(0, 1);
+    //     break;
+    //
+    //     case 37: //left
+    //     yellow.direction(-1, 0);
+    //     break;
+    //
+    //     case 39: //right
+    //     yellow.direction(1, 0);
+    //     break;
+    //   }
+    // }
 
     window.addEventListener('keydown', doKeyDown, true);
     // window.addEventListener('keydown', doKeyDownTwo, true);
