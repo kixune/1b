@@ -14,17 +14,17 @@
 
 function init () {
 
-  var playerOne = "";
-  var playerTwo = "";
+  var playerOne = '';
+  var playerTwo = '';
 
   function getName() {
     do {
-      playerOne = prompt("Player 1:\nPlease enter your name");
-    } while (playerOne === null || playerOne === "");
+      playerOne = prompt('Player 1:\nPlease enter your name');
+    } while (playerOne === null || playerOne === '');
     do {
-      playerTwo = prompt("Player 2:\nPlease enter your name");
-    } while (playerTwo === null || playerTwo === "");
-    alert(playerOne + " is Red,\n" + playerTwo + " is Yellow.\n\nYour directional keys are as displayed at the bottom.\n\nEliminate your opponents by blocking them..\n or laugh as they crash into themselves.\n\nBe careful not to suffer the same fate.");
+      playerTwo = prompt('Player 2:\nPlease enter your name');
+    } while (playerTwo === null || playerTwo === '');
+    alert(playerOne + ' is Red,\n' + playerTwo + ' is Yellow.\n\nYour directional keys are as displayed at the bottom.\n\nEliminate your opponents by blocking them..\n or laugh as they crash into themselves.\n\nBe careful not to suffer the same fate.');
   }getName();
 
 
@@ -33,39 +33,38 @@ function init () {
 
 
 }
-// init();
+
 
 
 
 $(document).ready(function() {
-  var $container = $("#container");
+  var $container = $('#container');
   var PIXEL_SIZE = 1;
   var CONT_BORDER = 498;
 
 
-  function HebiUnit(x, y, vx, vy, classname, word, tail) {
+  function SnakePiece(tail) {
 
-    this.x = x;
-    this.y = y;
-    this.vx = vx;
-    this.vy = vy;
+    // Position
+    this.x = 2;
+    this.y = 2;
 
+    // Velocity
+    this.vx = 1;
+    this.vy = 0;
 
-    this.$nake = $("<h4>");
-    this.classname = classname;
-    this.word = word;
     this.tail = tail;
+
+    this.snake = $('<h4>');
+
+    this.snake.appendTo($container);
+    // this.snake.text = this.head;
   }
 
 
     // Snake birth
-  HebiUnit.prototype = {
-    populate: function() {
-      this.$nake.addClass(this.classname);
-      this.$nake.html(this.word);
-      this.$nake.appendTo($container);
+  SnakePiece.prototype = {
 
-    },
 
     move: function(x, y) {
       // Move the tail to the next point
@@ -78,7 +77,7 @@ $(document).ready(function() {
       this.y = y;
 
       // Displays Snake's position
-      this.$nake.css({
+      this.snake.css({
         left: this.x * PIXEL_SIZE,
         top: this.y * PIXEL_SIZE,
       });
@@ -91,13 +90,24 @@ $(document).ready(function() {
       this.y += this.vy;
 
       // Grants permission to pass through walls
-      if ((this.vx === 1) && ((this.x + 16) == CONT_BORDER)) {
+
+      // right
+      if ((this.vx === 1) && ((this.x + 35s) == CONT_BORDER)) {
         this.x = 0;
-      } else if ((this.vx === -1) && (this.x === 0)) {
-        this.x = CONT_BORDER - 16;
-      } else if ((this.vy === -1) && (this.y === 0)) {
+      }
+
+      // left
+      else if ((this.vx === -1) && (this.x === 0)) {
+        this.x = CONT_BORDER - 35;
+      }
+
+      // top
+      else if ((this.vy === -1) && (this.y === 0)) {
         this.y = CONT_BORDER - 16;
-      } else if ((this.vy === 1) && (this.y == CONT_BORDER - 16)) {
+      }
+
+      // bottom
+      else if ((this.vy === 1) && (this.y == CONT_BORDER - 16)) {
         this.y = 0;
       }
 
@@ -113,79 +123,101 @@ $(document).ready(function() {
     },
 
     // Snake gains extra unit after the former
-    restOfSnake: function (i) {
-      console.log("rest of snake"+i);
+    extend: function () {
       var oldTail = this.tail;
-      this.tail = new HebiUnit(0, 0, 1, 0, "red", "+", oldTail);
+      this.tail = new SnakePiece(oldTail);
+      this.tail.snake[0].innerText = '•';
+      this.tail.snake[0].className = 'white';
     }
   };
 
 
     // Create a head
-    var red = new HebiUnit(0, 0, 1, 0, "red", "|");
-    // Make its tail
-    for (var i = 1; i < 7; i++) {
-      red.restOfSnake(i);
-      red.populate();
+    var red = new SnakePiece();
+    var red_snake = red.snake[0];
+    red_snake.innerText = '|';
+    red_snake.className = 'red flip';
 
-    }
-    // var yellow = new HebiUnit(477, 480, -1, 0, "yellow", "_");
-
-
+    // for (var i = 0; i < 100; i ++) {
+    //   red.extend();
+    // }
 
 
 
+    var yellow = new SnakePiece();
+    yellow.x = 470;
+    yellow.y = 475;
+    yellow.vx = -1;
+    var yellow_snake = yellow.snake[0];
+    yellow_snake.innerText = '|';
+    yellow_snake.className = 'yellow left';
+    // for (var i = 0; i < 7; i ++) {
+    //   yellow.extend();
+    // }
 
-    red.populate();
-    // yellow.populate();
+
+
+
+
+
+
 
     setInterval(red.update.bind(red), 3);
-    // setInterval(yellow.update.bind(yellow), 10);
+    setInterval(yellow.update.bind(yellow), 3);
 
-    console.log(red);
+
 
     function doKeyDown(evt) {
       switch (evt.keyCode) {
         case 87: //up
+        red_snake.className = 'red up';
         red.direction(0, -1);
         break;
 
         case 83: //down
+        red_snake.className = 'red down'
         red.direction(0, 1);
         break;
 
         case 65: //left
+        red_snake.className = 'red left'
         red.direction(-1, 0);
         break;
 
         case 68: //right
+        red_snake.className = 'red right'
         red.direction(1, 0);
         break;
       }
     }
 
-    // function doKeyDownTwo(evt) {
-    //   switch (evt.keyCode) {
-    //     case 38: //up
-    //     yellow.direction(0, -1);
-    //     break;
-    //
-    //     case 40: //down
-    //     yellow.direction(0, 1);
-    //     break;
-    //
-    //     case 37: //left
-    //     yellow.direction(-1, 0);
-    //     break;
-    //
-    //     case 39: //right
-    //     yellow.direction(1, 0);
-    //     break;
-    //   }
-    // }
+    function doKeyDownTwo(evt) {
+      switch (evt.keyCode) {
+        case 38: //up
+        yellow_snake.className = 'yellow up';
+        yellow.direction(0, -1);
+        break;
+
+        case 40: //down
+        yellow_snake.className = 'yellow down';
+        yellow.direction(0, 1);
+        break;
+
+        case 37: //left
+        yellow_snake.className = 'yellow left';
+        yellow.direction(-1, 0);
+        break;
+
+        case 39: //right
+
+        yellow_snake.className = 'yellow right';
+        yellow.direction(1, 0);
+        break;
+      }
+    }
 
     window.addEventListener('keydown', doKeyDown, true);
-    // window.addEventListener('keydown', doKeyDownTwo, true);
+    window.addEventListener('keydown', doKeyDownTwo, true);
 
 
 });

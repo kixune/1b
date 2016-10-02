@@ -15,11 +15,11 @@ background: #181303;
 text-align: center;
 }
 
-div {
+/*div {
 border: 1.5px solid #eeeeee;
 border: 1.5px solid rgba(255, 255, 255, 0.4);
 box-sizing: border-box;
-}
+}*/
 
 h1, h2, h3, h4 {
 font-family: 'tronregular', serif;
@@ -44,14 +44,14 @@ animation: glow 0.5s ease-in-out infinite alternate;
 }
 
 h3 {
-font-size: 1em;
-color: #fff;
+  font-size: 1em;
+  color: #fff;
 }
 
 h4 {
-  font-size: 0.75em;
   color: #fff;
   position: absolute;
+  font-size: 20px;
 }
 
 /*CLASSES*/
@@ -78,11 +78,30 @@ h4 {
 
 .red {
 text-shadow: 0 0 10px #fff, 0 0 20px #f00, 0 0 30px #f00, 0 0 40px #d91e18, 0 0 70px #d91e18, 0 0 80px #d91e18, 0 0 100px #d91e18;
-font-size: 16px;
 }
 
 .yellow {
-text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #f5d76e;
+text-shadow: 0 0 10px #f5d76e, 0 0 20px #f5d76e, 0 0 40px #f5d76e;
+}
+
+.flip {
+  transform: scale(1, -1);
+}
+
+.up {
+  transform: rotate(-90deg);
+}
+
+.down {
+  transform: rotate(90deg);
+}
+
+.left {
+  transform: scale(-1,1);
+}
+
+.right {
+  transform: scale(1, 1);
 }
 
 /*IDS*/
@@ -91,6 +110,7 @@ margin: 40px 0 0 0;
 }
 
 #container {
+box-sizing: border-box;
 border: 1.5px solid rgba(255, 255, 255, 0.4);
 box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
 width: 500px;
