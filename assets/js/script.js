@@ -92,7 +92,7 @@ $(document).ready(function() {
       // Grants permission to pass through walls
 
       // right
-      if ((this.vx === 1) && ((this.x + 35s) == CONT_BORDER)) {
+      if ((this.vx === 1) && ((this.x + 35) == CONT_BORDER)) {
         this.x = 0;
       }
 
