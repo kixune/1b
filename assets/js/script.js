@@ -40,7 +40,14 @@ function init () {
 $(document).ready(function() {
   var $container = $('#container');
   var PIXEL_SIZE = 1;
-  var CONT_BORDER = 498;
+  var CONT_BORDER = 500;
+
+  // Board Grid Design
+  for (var i = 0; i < 625; i++) {
+    $container.append($('<div>').addClass('grid-box'));
+
+  }
+
 
 
   function SnakePiece(tail) {
@@ -58,7 +65,7 @@ $(document).ready(function() {
     this.snake = $('<h4>');
 
     this.snake.appendTo($container);
-    // this.snake.text = this.head;
+
   }
 
 
@@ -68,9 +75,9 @@ $(document).ready(function() {
 
     move: function(x, y) {
       // Move the tail to the next point
-      if (this.tail) {
-          this.tail.move(this.x, this.y);
-      }
+      // if (this.tail) {
+      //     this.tail.move(this.x, this.y);
+      // }
 
       // Sets position of snake
       this.x = x;
@@ -90,7 +97,6 @@ $(document).ready(function() {
       this.y += this.vy;
 
       // Grants permission to pass through walls
-
       // right
       if ((this.vx === 1) && ((this.x + 35) == CONT_BORDER)) {
         this.x = 0;
@@ -122,13 +128,13 @@ $(document).ready(function() {
       this.vy = vy;
     },
 
-    // Snake gains extra unit after the former
-    extend: function () {
-      var oldTail = this.tail;
-      this.tail = new SnakePiece(oldTail);
-      this.tail.snake[0].innerText = '•';
-      this.tail.snake[0].className = 'white';
-    }
+    // // Snake gains extra unit after the former
+    // extend: function () {
+    //   var oldTail = this.tail;
+    //   this.tail = new SnakePiece(oldTail);
+    //   this.tail.snake[0].innerText = '•';
+    //   this.tail.snake[0].className = 'white';
+    // }
   };
 
 
@@ -138,32 +144,30 @@ $(document).ready(function() {
     red_snake.innerText = '|';
     red_snake.className = 'red flip';
 
-    // for (var i = 0; i < 100; i ++) {
+    // for (var i = 0; i < 20; i ++) {
     //   red.extend();
-    // }
+    // };
+
+    var $red = $('#red');
+    // var $yellow = $('#yellow');
 
 
 
-    var yellow = new SnakePiece();
-    yellow.x = 470;
-    yellow.y = 475;
-    yellow.vx = -1;
-    var yellow_snake = yellow.snake[0];
-    yellow_snake.innerText = '|';
-    yellow_snake.className = 'yellow left';
+    // var yellow = new SnakePiece();
+    // yellow.x = 470;
+    // yellow.y = 470;
+    // yellow.vx = -1;
+    // var yellow_snake = yellow.snake[0];
+    // yellow_snake.innerText = '|';
+    // yellow_snake.className = 'yellow left';
     // for (var i = 0; i < 7; i ++) {
     //   yellow.extend();
     // }
 
-
-
-
-
-
-
+    // console.log(yellow)
 
     setInterval(red.update.bind(red), 3);
-    setInterval(yellow.update.bind(yellow), 3);
+    // setInterval(yellow.update.bind(yellow), 2);
 
 
 
@@ -191,33 +195,33 @@ $(document).ready(function() {
       }
     }
 
-    function doKeyDownTwo(evt) {
-      switch (evt.keyCode) {
-        case 38: //up
-        yellow_snake.className = 'yellow up';
-        yellow.direction(0, -1);
-        break;
-
-        case 40: //down
-        yellow_snake.className = 'yellow down';
-        yellow.direction(0, 1);
-        break;
-
-        case 37: //left
-        yellow_snake.className = 'yellow left';
-        yellow.direction(-1, 0);
-        break;
-
-        case 39: //right
-
-        yellow_snake.className = 'yellow right';
-        yellow.direction(1, 0);
-        break;
-      }
-    }
+    // function doKeyDownTwo(evt) {
+    //   switch (evt.keyCode) {
+    //     case 38: //up
+    //     yellow_snake.className = 'yellow up';
+    //     yellow.direction(0, -1);
+    //     break;
+    //
+    //     case 40: //down
+    //     yellow_snake.className = 'yellow down';
+    //     yellow.direction(0, 1);
+    //     break;
+    //
+    //     case 37: //left
+    //     yellow_snake.className = 'yellow left';
+    //     yellow.direction(-1, 0);
+    //     break;
+    //
+    //     case 39: //right
+    //
+    //     yellow_snake.className = 'yellow right';
+    //     yellow.direction(1, 0);
+    //     break;
+    //   }
+    // }
 
     window.addEventListener('keydown', doKeyDown, true);
-    window.addEventListener('keydown', doKeyDownTwo, true);
+    // window.addEventListener('keydown', doKeyDownTwo, true);
 
 
 });
